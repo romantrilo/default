@@ -1,0 +1,119 @@
+
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<link rel="shortcut icon" href="http://romantrilo.com/images/favicon.ico">
+		<meta charset="utf-8">
+		<title>Roman Trilo</title>
+		<meta name="description" content="Trilo's personal website">
+		<meta name="author" content="Roman Trilo">
+		<meta name="viewport" content="width=800, user-scalable=no">
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="css/style.css">
+		<script src="js/meny.min.js"></script>
+		<script type="text/javascript" src="js/jquery-v1.8.2.js"></script>
+		<script type="text/javascript" src="js/jquery-events-frame.js"></script>
+		<script type="text/javascript" src="js/jparallax.js"></script>
+	</head>
+	
+	<body>
+
+		<div class="meny">
+			<a href="" class="logo"><img src="images/2.png" alt="" style="max-width:70%;"/></a>
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="http://romantrilo.com/">Main</a></li>
+				<li><a href="">About</a></li>
+				<li><a href="">Contacts</a></li>
+				<li><a href="http://blog.romantrilo.com/">Blog</a></li>
+			</ul>
+		</div>
+
+		<div class="meny-arrow"></div>
+
+		<div class="contents">
+		<div class="parallax-layer" style="width:1400px; height:550px;">
+            <img src="images/tree.png" alt="" style="position:absolute; left:46%; top:230px;"/>
+        </div>
+        <div class="parallax-layer" style="width:1450px; height:550px;">
+            <img src="images/snow.png" alt="" style="position:absolute; left:-30px; top:300px;"/>
+        </div>
+		<div class="parallax-layer" style="width:1450px; height:530px;">
+            <a href="http://romantrilo.com/" alt="" style="position:absolute; left:75%; top:10%; color:black; font-family:Century Gothic; font-size:200%">Roman Trilo</a>
+        </div>
+        </div>
+
+
+		<script>
+			jQuery(document).ready(function(){
+				// Declare parallax on layers
+				jQuery('.parallax-layer').parallax({
+					mouseport: jQuery(".contents")
+				});
+			});
+		</script>
+
+		<script>
+		//roll-link
+		var supports3DTransforms =  document.body.style['webkitPerspective'] !== undefined || 
+                            document.body.style['MozPerspective'] !== undefined;
+
+		function linkify( selector ) {
+			if( supports3DTransforms ) {
+        
+		var nodes = document.querySelectorAll( selector );
+
+        for( var i = 0, len = nodes.length; i < len; i++ ) {
+            var node = nodes[i];
+
+            if( !node.className || !node.className.match( /roll/g ) ) {
+                node.className += ' roll';
+                node.innerHTML = '<span data-title="'+ node.text +'">' + node.innerHTML + '</span>';
+				}
+			};
+			}
+		}	
+
+		linkify( 'a' );
+	
+			// Create an instance of Meny
+			var meny = Meny.create({
+				// The element that will be animated in from off screen
+				menuElement: document.querySelector( '.meny' ),
+
+				// The contents that gets pushed aside while Meny is active
+				contentsElement: document.querySelector( '.contents' ),
+
+				// [optional] The alignment of the menu (top/right/bottom/left)
+				position: Meny.getQuery().p || 'left',
+
+				// [optional] The height of the menu (when using top/bottom position)
+				height: 200,
+
+				// [optional] The width of the menu (when using left/right position)
+				width: 260,
+
+				// [optional] Distance from mouse (in pixels) when menu should open
+				threshold: 40
+			});
+
+			// API Methods:
+			// meny.open();
+			// meny.close();
+			// meny.isOpen();
+			
+			// Events:
+			// meny.addEventListener( 'open', function(){ console.log( 'open' ); } );
+			// meny.addEventListener( 'close', function(){ console.log( 'close' ); } );
+
+			// Embed an iframe if a URL is passed in
+			if( Meny.getQuery().u && Meny.getQuery().u.match( /^http/gi ) ) {
+				var contents = document.querySelector( '.contents' );
+				contents.style.padding = '0px';
+				contents.innerHTML = '<div class="cover"></div><iframe src="'+ Meny.getQuery().u +'" style="width: 100%; height: 100%; border: 0; position: absolute;"></iframe>';
+			}
+		</script>
+
+	</body>
+</html>
